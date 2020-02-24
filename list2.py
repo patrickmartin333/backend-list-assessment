@@ -12,7 +12,7 @@ Kenzie assignment: List2
 # http://code.google.com/edu/languages/google-python-class/
 
 # Instructions:
-# Complete each of these list manipulation exercises in the same way as the 
+# Complete each of these list manipulation exercises in the same way as the
 # previous List1 excercises.
 
 # D. Given a list of numbers, return a list where
@@ -23,8 +23,11 @@ Kenzie assignment: List2
 
 
 def remove_adjacent(nums):
-    # your code here
-    return
+    result = []  # start w/ empty list to house results
+    for number in nums:
+        if len(result) == 0 or number != result[-1]:
+            result.append(number)
+    return result
 
 
 # E. Given two lists sorted in increasing order, create and return a merged
@@ -33,8 +36,15 @@ def remove_adjacent(nums):
 # Hint: Don't use `sort` or `sorted` -- they are not O(n) linear time, and the two lists
 # are already provided in ascending sorted order.
 def linear_merge(list1, list2):
-    # your code here
-    return
+    result = []
+    while list1 and list2:
+        if list1[0] < list2[0]:
+            result.append(list1.pop(0))
+        else:
+            result.append(list2.pop(0))
+    result.extend(list1)
+    result.extend(list2)
+    return result
 
 
 # Simple provided test() function used in main() to print
@@ -44,7 +54,8 @@ def test(got, expected):
         prefix = ' OK '
     else:
         prefix = '  X '
-    print('{} got: {}     expected: {}'.format(prefix, repr(got), repr(expected)))
+    print('{} got: {}     expected: {}'.format(
+        prefix, repr(got), repr(expected)))
 
 
 # Calls the above functions with interesting inputs.
